@@ -81,7 +81,7 @@ function analisandoEstrategias() {
 
         // inserir display no lobby
         if (!displayLobbyExists) {
-            painelLobby = document.querySelector('.lobby__filter');
+            painelLobby = document.querySelector('.lobby-header__filterqDmLZJ0RC7XlyyjENEqe');
             painelLobby.insertAdjacentHTML('afterbegin', '<h1 id = "displaybotlobby" style="width: 90%;background-color: #56ef00;color: black;text-align: center; font-size: xx-large;font-weight: bolder;align-self: center;"></h1>');
             displayRoletaExists = false
             displayLobbyExists = true
@@ -242,12 +242,12 @@ function listarRoletasLobby(qtd) {
         roletasLobby.push({ nome: nomeRoleta, sequencia: listaSequenciaNew })
     }
     //retornar roletas
-    if(inverterLeitura){
+    if (inverterLeitura) {
         return roletasLobby.reverse()
-    }else{
+    } else {
         return roletasLobby
     }
-    
+
 
 }
 
@@ -463,17 +463,21 @@ function estrategiaColunasSalaRoleta(roleta) {
 
 // Ciclo do bot
 setInterval(() => {
-    leituras++
-    if(leituras == 7){
-        leituras = 0
-        if(inverterLeitura){
-            inverterLeitura = false
-        }else{
-            inverterLeitura = true
-        }  
+    try {
+        leituras++
+        if (leituras == 7) {
+            leituras = 0
+            if (inverterLeitura) {
+                inverterLeitura = false
+            } else {
+                inverterLeitura = true
+            }
+        }
+        //carrega configuração
+        carregarConfiguracao()
+        //analisar estrategias
+        analisandoEstrategias()
+    } catch (err) {
+        console.log(err)
     }
-    //carrega configuração
-    carregarConfiguracao()
-    //analisar estrategias
-    analisandoEstrategias()
 }, 3000)
